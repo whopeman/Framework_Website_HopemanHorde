@@ -8,6 +8,7 @@
     2026-10-26  0.2.0  Added 0.2.0 entry.
     2026-10-26  0.3.0  Added 0.3.0 entry.
     2026-10-26  0.4.0  Added 0.4.0 entry.
+    2026-10-26  0.4.1  Added 0.4.1 entry.
 -->
 
 # Changelog
@@ -15,6 +16,19 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
+
+## [0.4.1] - 2026-10-26
+
+### Fixed
+
+- Missing pages showed GoDaddy's 404: cPanel serves `404.shtml` and ignores
+  the `.htaccess` ErrorDocument, so `scripts/deploy.ps1` now also uploads
+  the 404 page as `404.shtml`.
+
+### Removed
+
+- GoDaddy placeholder files on the server (`home.html`,
+  `layout-styles.css`, old `404.shtml`); backed up locally first.
 
 ## [0.4.0] - 2026-10-26
 

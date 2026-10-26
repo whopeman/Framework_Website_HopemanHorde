@@ -19,6 +19,7 @@
   Change log:
     2026-10-26  0.3.0  Initial SFTP deploy script with dry-run default.
     2026-10-26  0.4.0  Upload top-level dotfiles (.htaccess).
+    2026-10-26  0.4.1  Also upload the 404 page as 404.shtml.
 #>
 param(
   [string]$ConfigPath = 'deploy.local.json',
@@ -81,6 +82,9 @@ if (Test-Path 'public') {
   Get-ChildItem -Path 'public' -Force -File -Filter '.*' |
     ForEach-Object { $batch += "put `"$($_.Name)`"" }
 }
+# cPanel's server config serves 404.shtml for missing pages and ignores the
+# .htaccess ErrorDocument, so publish our 404 page under that name too.
+if (Test-Path 'public/404.html') { $batch += 'put "404.html" "404.shtml"' }
 $batch += 'bye'
 
 if (-not $Execute) {
