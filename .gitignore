@@ -4,6 +4,7 @@
 # Purpose : Keep build output, dependencies and all secrets out of git.
 # Change log:
 #   2026-10-26  0.1.0  Initial ignore list.
+#   2026-10-26  0.3.0  Ignore deploy.local.json.
 
 # Hugo output and caches
 public/
@@ -20,6 +21,7 @@ node_modules/
 id_*
 *token*
 .env*
+deploy.local.json
 *.secret
 *login*.txt
 

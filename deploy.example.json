@@ -1,0 +1,8 @@
+{
+  "//": "Framework_Website_HopemanHorde - 2026-10-26 - Template for deploy.local.json (gitignored). Copy, fill in, never commit. remotePath is relative to the cPanel home dir. Change log: 0.3.0 initial.",
+  "host": "your-server.secureserver.net",
+  "port": 22,
+  "user": "cpanel-username",
+  "keyPath": "C:/Users/you/path/to/cpanel_deploy_key",
+  "remotePath": "public_html"
+}

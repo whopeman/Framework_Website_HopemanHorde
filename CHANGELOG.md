@@ -6,6 +6,7 @@
   Change log:
     2026-10-26  0.1.0  Created.
     2026-10-26  0.2.0  Added 0.2.0 entry.
+    2026-10-26  0.3.0  Added 0.3.0 entry.
 -->
 
 # Changelog
@@ -13,6 +14,17 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
+
+## [0.3.0] - 2026-10-26
+
+### Added
+
+- `scripts/deploy.ps1`: build, lint, test, then SFTP upload of `public/` to
+  cPanel. Dry run by default; `-Execute` uploads. Key-based auth only;
+  config fields named like passwords/secrets/tokens are refused;
+  `remotePath` must be relative with no `..`.
+- `deploy.example.json` template; `deploy.local.json` is gitignored.
+- `npm run deploy` script and `tests/deploy.test.mjs` safety tests.
 
 ## [0.2.0] - 2026-10-26
 
