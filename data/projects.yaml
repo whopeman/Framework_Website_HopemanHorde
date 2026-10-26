@@ -1,0 +1,23 @@
+# =============================================================================
+# data/projects.yaml
+# Project : Framework_Website_HopemanHorde
+# Date    : 2026-10-26
+# Purpose : Registry of projects hosted under HopemanHorde.com. The home page
+#           renders this list; every hosted project gets one entry here.
+# Usage   : Append an item per project. Must remain a YAML list.
+# Params (per item):
+#   name        - Display name (required)
+#   path        - Site-relative URL, e.g. /my-project/ (required)
+#   description - One-line summary (required)
+#   repo        - GitHub repository URL (optional)
+#   status      - e.g. active, archived (optional)
+# Example:
+#   - name: Example
+#     path: /example/
+#     description: A sample project.
+#     repo: https://github.com/whopeman/example
+#     status: active
+# Change log:
+#   2026-10-26  0.1.0  Created as an empty list placeholder.
+# =============================================================================
+[]

@@ -1,0 +1,15 @@
+{{- /*
+  layouts/_partials/header.html
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Site header with title and GitHub link.
+  Usage   : {{ partial "header.html" . }}
+  Change log:
+    2026-10-26  0.1.0  Initial header.
+*/ -}}
+<header>
+  <a class="site-title" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+  <nav>
+    <a href="https://github.com/{{ site.Params.githubUser }}">GitHub</a>
+  </nav>
+</header>

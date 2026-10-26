@@ -1,0 +1,19 @@
+{{- /*
+  layouts/section.html
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Default section (list) template for a project's landing page.
+  Change log:
+    2026-10-26  0.1.0  Initial section template.
+*/ -}}
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{- with .Pages }}
+  <ul>
+    {{- range . }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}
+  </ul>
+  {{- end }}
+</article>
+{{- end }}

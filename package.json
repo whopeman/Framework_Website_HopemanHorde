@@ -1,0 +1,28 @@
+{
+  "//": [
+    "package.json - Project: Framework_Website_HopemanHorde - Date: 2026-10-26",
+    "Purpose: dev-only tooling (lint + tests); the site itself is built by Hugo.",
+    "Usage: npm install; npm run build; npm run lint; npm test",
+    "Change log: 2026-10-26 0.1.0 Initial tooling."
+  ],
+  "name": "framework-website-hopemanhorde",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Source for HopemanHorde.com",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "hugo --gc --cleanDestinationDir",
+    "lint": "npm run lint:md && npm run lint:yaml && npm run lint:html",
+    "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#public\"",
+    "lint:yaml": "yamllint hugo.yaml data/projects.yaml",
+    "lint:html": "html-validate \"public/**/*.html\"",
+    "test": "node --test \"tests/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "html-validate": "^11.17.0",
+    "markdownlint-cli2": "^0.24.0",
+    "yaml": "^2.9.1",
+    "yaml-lint": "^1.7.0"
+  }
+}

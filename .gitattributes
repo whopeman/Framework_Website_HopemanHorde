@@ -1,0 +1,3 @@
+# .gitattributes - Framework_Website_HopemanHorde - 2026-10-26 - normalize line endings to LF (matches .editorconfig). Change log: 0.1.0 initial.
+* text=auto eol=lf
+*.ps1 text eol=crlf

@@ -1,0 +1,23 @@
+# =============================================================================
+# hugo.yaml
+# Project : Framework_Website_HopemanHorde
+# Date    : 2026-10-26
+# Purpose : Hugo site configuration for HopemanHorde.com.
+# Usage   : Read automatically by `hugo` / `hugo server` from the repo root.
+# Params  :
+#   params.githubUser - GitHub username linked from the About section.
+#   params.author     - Site owner's display name.
+# Change log:
+#   2026-10-26  0.1.0  Initial configuration.
+# =============================================================================
+baseURL: https://hopemanhorde.com/
+locale: en-us
+title: Hopeman Horde
+disableKinds:
+  - taxonomy
+  - term
+  - RSS
+params:
+  author: Ward Hopeman
+  githubUser: whopeman
+  description: Ward Hopeman's personal site and project hub.

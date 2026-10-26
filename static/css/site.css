@@ -1,0 +1,48 @@
+/*
+  static/css/site.css
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Minimal site stylesheet (own theme, light and dark).
+  Change log:
+    2026-10-26  0.1.0  Initial styles.
+*/
+:root {
+  --bg: #fdfdfc;
+  --fg: #1d1f21;
+  --muted: #5f6368;
+  --accent: #2b5fad;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181b;
+    --fg: #e6e6e3;
+    --muted: #9aa0a6;
+    --accent: #7ea8e8;
+  }
+}
+
+body {
+  margin: 0 auto;
+  max-width: 44rem;
+  padding: 1.5rem 1rem;
+  background: var(--bg);
+  color: var(--fg);
+  font: 1.05rem/1.6 system-ui, sans-serif;
+}
+
+a { color: var(--accent); }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+}
+
+.site-title { font-weight: 700; text-decoration: none; color: var(--fg); }
+.project-list { list-style: none; padding: 0; }
+.project-list li { margin-bottom: 1.25rem; }
+.project-list p { margin: 0.25rem 0; }
+.status { color: var(--muted); font-size: 0.85em; margin-left: 0.5rem; }
+footer { margin-top: 3rem; color: var(--muted); font-size: 0.9em; }

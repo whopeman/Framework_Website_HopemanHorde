@@ -1,0 +1,12 @@
+# .markdownlint-cli2.yaml
+# Project : Framework_Website_HopemanHorde
+# Date    : 2026-10-26
+# Purpose : markdownlint configuration.
+# Change log:
+#   2026-10-26  0.1.0  Allow leading HTML header comments and wide tables.
+config:
+  MD013: false        # line length (tables/URLs)
+  MD041: false        # files start with a header comment, not an H1
+ignores:
+  - node_modules/**
+  - public/**

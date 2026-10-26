@@ -1,0 +1,28 @@
+{{- /*
+  layouts/baseof.html
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Base HTML shell shared by every page (own minimal theme).
+  Usage   : Other templates fill the "main" block.
+  Change log:
+    2026-10-26  0.1.0  Initial base template.
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ site.Params.description }}">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+  </head>
+  <body>
+    {{ partial "header.html" . }}
+    <main>
+      {{- block "main" . }}{{ end }}
+    </main>
+    <footer>
+      <p>&copy; {{ now.Year }} {{ site.Params.author }}</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{{- /*
+  layouts/page.html
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Default single-page template (project pages).
+  Change log:
+    2026-10-26  0.1.0  Initial page template.
+*/ -}}
+{{ define "main" }}
+<article>
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+</article>
+{{ end }}

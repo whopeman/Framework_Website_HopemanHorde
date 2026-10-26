@@ -1,0 +1,33 @@
+{{- /*
+  layouts/home.html
+  Project : Framework_Website_HopemanHorde
+  Date    : 2026-10-26
+  Purpose : Home page: About text, GitHub link, and the project list
+            rendered from data/projects.yaml (via hugo.Data).
+  Change log:
+    2026-10-26  0.1.0  Initial home template.
+*/ -}}
+{{ define "main" }}
+<section id="about">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  <p>Find my code on <a href="https://github.com/{{ site.Params.githubUser }}">GitHub (@{{ site.Params.githubUser }})</a>.</p>
+</section>
+<section id="projects">
+  <h2>Projects</h2>
+  {{- with hugo.Data.projects }}
+  <ul class="project-list">
+    {{- range . }}
+    <li>
+      <a href="{{ .path | relURL }}">{{ .name }}</a>
+      {{ with .status }}<span class="status">{{ . }}</span>{{ end }}
+      <p>{{ .description }}</p>
+      {{ with .repo }}<p><a href="{{ . }}">Source</a></p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p>No projects published yet.</p>
+  {{- end }}
+</section>
+{{- end }}
