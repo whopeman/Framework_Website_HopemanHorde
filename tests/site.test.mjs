@@ -8,6 +8,7 @@
     2026-10-26  0.1.0  Initial tests: index.html exists with GitHub link;
                        data/projects.yaml parses as a list.
     2026-10-26  0.4.0  404 page and .htaccess tests.
+    2026-10-26  0.5.0  HTTPS redirect test (ACME challenges exempt).
 */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -52,4 +53,15 @@ test('built site ships an .htaccess using the 404 page', () => {
   const file = join(root, 'public', '.htaccess');
   assert.ok(existsSync(file), 'public/.htaccess missing');
   assert.match(readFileSync(file, 'utf8'), /^ErrorDocument 404 \/404\.html$/m);
+});
+
+test('.htaccess redirects http to https but not ACME challenges', () => {
+  const ht = readFileSync(join(root, 'public', '.htaccess'), 'utf8');
+  const live = ht.split(/\r?\n/).filter((l) => !l.trim().startsWith('#')).join('\n');
+  assert.match(live, /^RewriteEngine On$/m);
+  assert.match(live, /^RewriteCond %\{HTTPS\} off$/m);
+  assert.match(live, /^RewriteRule \^ https:\/\/%\{HTTP_HOST\}%\{REQUEST_URI\} \[L,R=301\]$/m);
+  const acme = live.indexOf('RewriteCond %{REQUEST_URI} !^/\\.well-known/acme-challenge/');
+  assert.ok(acme >= 0, 'ACME challenge exclusion missing');
+  assert.ok(acme < live.indexOf('RewriteRule'), 'ACME exclusion must precede the redirect rule');
 });

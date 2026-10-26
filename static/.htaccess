@@ -3,18 +3,21 @@
 # Project : Framework_Website_HopemanHorde
 # Date    : 2026-10-26
 # Purpose : Apache settings for HopemanHorde.com on GoDaddy cPanel hosting.
-# Notes   : The HTTPS redirect below stays commented out until a trusted
-#           certificate is installed; enabling it earlier would send every
-#           visitor to a browser security warning.
+# Notes   : cPanel serves 404.shtml for missing pages regardless of the
+#           ErrorDocument below; deploy.ps1 uploads 404.html under that name.
+#           /.well-known/acme-challenge/ is exempt from the HTTPS redirect so
+#           Let's Encrypt renewals can validate over plain HTTP.
 # Change log:
 #   2026-10-26  0.4.0  Default page, custom 404, no directory listings,
 #                      HTTPS redirect prepared (disabled).
+#   2026-10-26  0.5.0  HTTPS redirect enabled, ACME challenges exempt.
 # =============================================================================
 DirectoryIndex index.html
 ErrorDocument 404 /404.html
 Options -Indexes
 
-# --- HTTPS redirect: enable once a trusted certificate is installed ---------
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# --- Redirect all HTTP traffic to HTTPS (except ACME validation) ------------
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
