@@ -3,10 +3,10 @@
     "package.json - Project: Framework_Website_HopemanHorde - Date: 2026-10-26",
     "Purpose: dev-only tooling (lint + tests); the site itself is built by Hugo.",
     "Usage: npm install; npm run build; npm run lint; npm test",
-    "Change log: 2026-10-26 0.1.0 Initial tooling; 0.2.0 version bump; 0.3.0 deploy script; 0.4.0 version bump; 0.4.1 version bump; 0.5.0 version bump."
+    "Change log: 2026-10-26 0.1.0 Initial tooling; 0.2.0 version bump; 0.3.0 deploy script; 0.4.0 version bump; 0.4.1 version bump; 0.5.0 version bump; 0.6.0 new-project script."
   ],
   "name": "framework-website-hopemanhorde",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "Source for HopemanHorde.com",
   "license": "MIT",
@@ -18,7 +18,8 @@
     "lint:yaml": "yamllint hugo.yaml data/projects.yaml",
     "lint:html": "html-validate \"public/**/*.html\"",
     "test": "node --test \"tests/**/*.test.mjs\"",
-    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/deploy.ps1"
+    "deploy": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/deploy.ps1",
+    "new-project": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/new-project.ps1"
   },
   "devDependencies": {
     "html-validate": "^11.17.0",

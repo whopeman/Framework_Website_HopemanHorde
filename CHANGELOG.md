@@ -10,6 +10,7 @@
     2026-10-26  0.4.0  Added 0.4.0 entry.
     2026-10-26  0.4.1  Added 0.4.1 entry.
     2026-10-26  0.5.0  Added 0.5.0 entry.
+    2026-10-26  0.6.0  Added 0.6.0 entry.
 -->
 
 # Changelog
@@ -17,6 +18,23 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
+
+## [0.6.0] - 2026-10-26
+
+### Added
+
+- Hosted-project convention: each project has its own repo and is served at
+  `/<slug>/` from `public_html/<slug>/`; documented in the README section
+  "Adding a hosted project".
+- `scripts/new-project.ps1` (`npm run new-project`): validates the slug and
+  fields, appends the project to `data/projects.yaml`, and with
+  `-ScaffoldPath` creates a starter folder from `templates/project/`.
+- `scripts/reserved-slugs.json`: names projects may not use.
+- `scripts/deploy.ps1` project mode (`slug` + `sourceDir` in the config):
+  uploads only into `public_html/<slug>`, skips the main-site build and the
+  main 404 page.
+- Tests: `tests/reserved.test.mjs`, `tests/new-project.test.mjs` and
+  project-mode deploy tests.
 
 ## [0.5.0] - 2026-10-26
 

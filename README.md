@@ -7,6 +7,7 @@
     2026-10-26  0.1.0  Initial README.
     2026-10-26  0.3.0  Deploy instructions.
     2026-10-26  0.5.0  HTTPS / Let's Encrypt section.
+    2026-10-26  0.6.0  "Adding a hosted project" convention and steps.
 -->
 
 # Framework_Website_HopemanHorde
@@ -27,7 +28,8 @@ templates (no third-party theme).
 | `layouts/`           | Templates (`baseof`, `home`, `page`, `section`)    |
 | `data/projects.yaml` | Registry of hosted projects shown on the home page |
 | `static/`            | Files copied as-is (CSS, images)                   |
-| `scripts/`           | Helper scripts (build, deploy)                     |
+| `scripts/`           | Helper scripts (build, deploy, new-project)        |
+| `templates/project/` | Starter files for a new hosted project             |
 | `tests/`             | `node:test` smoke tests                            |
 
 ## Prerequisites
@@ -54,13 +56,46 @@ npm run lint         # markdownlint, yaml-lint, html-validate
 npm test             # node:test smoke tests
 ```
 
-## Adding a project
+## Adding a hosted project
 
-1. Add an entry to `data/projects.yaml` (`name`, `path`, `description`,
-   optional `repo` and `status`).
-2. Put the project's pages under `content/<project>/` (or its static build
-   under `static/<project>/`) so it is served at `/<project>/`.
-3. Build, lint, test, then deploy.
+Convention:
+
+- Each project lives in **its own repository** and is served at
+  `https://hopemanhorde.com/<slug>/`, from `public_html/<slug>/` on the host.
+- The main site owns only the top level. Its deploy uploads `public/` and
+  never deletes anything, and `tests/reserved.test.mjs` fails if the main
+  site ever builds a top-level folder that is not in
+  `scripts/reserved-slugs.json`, so it cannot overwrite a project folder.
+- A project's deploy uploads only into its own `public_html/<slug>/`.
+- Slugs are lowercase `a-z`, `0-9` and single hyphens (max 40 chars), and
+  must not be in `scripts/reserved-slugs.json` (`css`, `cgi-bin`,
+  `.well-known`, `hopemanhorde.com`, ...).
+
+Steps:
+
+1. Register the project (and optionally scaffold its starter folder):
+
+   ```sh
+   npm run new-project -- -Slug my-tool -Name "My Tool" -Description "What it does" `
+     -Repo https://github.com/whopeman/my-tool -Status active -ScaffoldPath ../my-tool
+   ```
+
+   This validates the slug, appends the entry to `data/projects.yaml` and,
+   with `-ScaffoldPath`, creates a folder from `templates/project/`
+   (README, starter `index.html`, `deploy.example.json` aimed at
+   `public_html/<slug>`, `.gitignore`).
+2. Build, lint, test and deploy the main site so the project card appears.
+3. In the project, copy `deploy.example.json` to `deploy.local.json`, set
+   `keyPath` and `sourceDir`, then from this repo:
+
+   ```sh
+   npm run deploy -- -ConfigPath ../my-tool/deploy.local.json            # dry run
+   npm run deploy -- -ConfigPath ../my-tool/deploy.local.json -Execute   # upload
+   ```
+
+   Project mode is triggered by the `slug` key. It refuses any `remotePath`
+   other than `public_html/<slug>`, refuses reserved slugs and passwords,
+   skips the main-site build, and never uploads the main 404 page.
 
 ## Deploy
 

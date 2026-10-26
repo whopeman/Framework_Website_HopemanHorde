@@ -1,0 +1,13 @@
+# .gitignore
+# Project : {{NAME}}
+# Date    : {{DATE}}
+# Purpose : Keep local deploy config, keys and build output out of git.
+# Change log:
+#   {{DATE}}  0.1.0  Created from the Framework_Website_HopemanHorde template.
+deploy.local.json
+.ssh/
+*.key
+*.pem
+id_*
+.env*
+node_modules/

@@ -1,0 +1,10 @@
+{
+  "//": "{{NAME}} - {{DATE}} - Template for deploy.local.json (gitignored). Deploys sourceDir to public_html/{{SLUG}} only. Change log: 0.1.0 created from template.",
+  "slug": "{{SLUG}}",
+  "host": "132.148.176.16",
+  "port": 22,
+  "user": "cpanel-username",
+  "keyPath": "C:/Users/you/path/to/deploy_key",
+  "sourceDir": "site",
+  "remotePath": "public_html/{{SLUG}}"
+}

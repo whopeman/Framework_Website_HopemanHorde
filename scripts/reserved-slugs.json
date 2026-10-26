@@ -1,0 +1,29 @@
+{
+  "//": [
+    "scripts/reserved-slugs.json - Project: Framework_Website_HopemanHorde - Date: 2026-10-26",
+    "Purpose: top-level names under public_html that hosted projects may not use, because the main site, cPanel or the server own them.",
+    "Used by scripts/new-project.ps1, scripts/deploy.ps1 and tests/reserved.test.mjs.",
+    "Change log: 2026-10-26 0.6.0 Initial list."
+  ],
+  "reserved": [
+    ".well-known",
+    "404",
+    "admin",
+    "api",
+    "assets",
+    "cgi-bin",
+    "cpanel",
+    "css",
+    "fonts",
+    "hopemanhorde.com",
+    "images",
+    "img",
+    "index",
+    "js",
+    "mail",
+    "projects",
+    "sitemap",
+    "static",
+    "webmail"
+  ]
+}
