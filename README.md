@@ -6,6 +6,7 @@
   Change log:
     2026-10-26  0.1.0  Initial README.
     2026-10-26  0.3.0  Deploy instructions.
+    2026-10-26  0.5.0  HTTPS / Let's Encrypt section.
 -->
 
 # Framework_Website_HopemanHorde
@@ -84,6 +85,22 @@ npm run deploy -- -Execute     # real upload
 ```
 
 Uploads add or overwrite files; nothing on the server is deleted.
+
+## HTTPS
+
+The hosting plan has no AutoSSL, so the certificate comes from
+Let's Encrypt via [acme.sh](https://github.com/acmesh-official/acme.sh),
+installed in the hosting account at `~/.acme.sh`:
+
+- Covers `hopemanhorde.com` and `www.hopemanhorde.com` (webroot validation
+  through `public_html`).
+- A daily cron job renews it about every 60 days and reinstalls it in
+  cPanel with the `cpanel_uapi` deploy hook.
+- `static/.htaccess` redirects HTTP to HTTPS but leaves
+  `/.well-known/acme-challenge/` alone so renewals can validate.
+
+Check status over SSH: `~/.acme.sh/acme.sh --list`.
+Force a renewal: `~/.acme.sh/acme.sh --renew -d hopemanhorde.com --ecc --force`.
 
 ## License
 

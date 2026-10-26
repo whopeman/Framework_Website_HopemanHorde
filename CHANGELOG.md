@@ -9,6 +9,7 @@
     2026-10-26  0.3.0  Added 0.3.0 entry.
     2026-10-26  0.4.0  Added 0.4.0 entry.
     2026-10-26  0.4.1  Added 0.4.1 entry.
+    2026-10-26  0.5.0  Added 0.5.0 entry.
 -->
 
 # Changelog
@@ -16,6 +17,20 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
+
+## [0.5.0] - 2026-10-26
+
+### Added
+
+- HTTPS for `hopemanhorde.com` and `www.hopemanhorde.com` with a free
+  Let's Encrypt certificate, issued by acme.sh in the hosting account and
+  installed through cPanel (`cpanel_uapi` deploy hook). A daily cron job
+  renews it about every 60 days and reinstalls it automatically.
+
+### Changed
+
+- `static/.htaccess`: HTTP now redirects to HTTPS (301), except
+  `/.well-known/acme-challenge/` so certificate renewals keep validating.
 
 ## [0.4.1] - 2026-10-26
 
