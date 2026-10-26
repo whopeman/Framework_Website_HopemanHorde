@@ -7,6 +7,7 @@
   Change log:
     2026-10-26  0.1.0  Initial tests: index.html exists with GitHub link;
                        data/projects.yaml parses as a list.
+    2026-10-26  0.4.0  404 page and .htaccess tests.
 */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -39,4 +40,16 @@ test('every project entry has name, path and description', () => {
       assert.ok(p[key], `project ${JSON.stringify(p)} is missing "${key}"`);
     }
   }
+});
+
+test('built site has a 404 page that links home', () => {
+  const page = join(root, 'public', '404.html');
+  assert.ok(existsSync(page), 'public/404.html missing');
+  assert.match(readFileSync(page, 'utf8'), /href="\/"/);
+});
+
+test('built site ships an .htaccess using the 404 page', () => {
+  const file = join(root, 'public', '.htaccess');
+  assert.ok(existsSync(file), 'public/.htaccess missing');
+  assert.match(readFileSync(file, 'utf8'), /^ErrorDocument 404 \/404\.html$/m);
 });

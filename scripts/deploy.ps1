@@ -18,6 +18,7 @@
             Uploads add/overwrite files; nothing on the server is deleted.
   Change log:
     2026-10-26  0.3.0  Initial SFTP deploy script with dry-run default.
+    2026-10-26  0.4.0  Upload top-level dotfiles (.htaccess).
 #>
 param(
   [string]$ConfigPath = 'deploy.local.json',
@@ -74,8 +75,13 @@ $batch = @(
   "cd `"$remotePath`""
   "lcd `"public`""
   'put -r *'
-  'bye'
 )
+# sftp's * glob skips dotfiles, so upload top-level ones (e.g. .htaccess) by name.
+if (Test-Path 'public') {
+  Get-ChildItem -Path 'public' -Force -File -Filter '.*' |
+    ForEach-Object { $batch += "put `"$($_.Name)`"" }
+}
+$batch += 'bye'
 
 if (-not $Execute) {
   Write-Output 'DRY RUN - nothing will be uploaded. Re-run with -Execute to deploy.'

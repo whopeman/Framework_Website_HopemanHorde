@@ -1,0 +1,20 @@
+# =============================================================================
+# static/.htaccess  (copied to public/.htaccess, deployed to public_html)
+# Project : Framework_Website_HopemanHorde
+# Date    : 2026-10-26
+# Purpose : Apache settings for HopemanHorde.com on GoDaddy cPanel hosting.
+# Notes   : The HTTPS redirect below stays commented out until a trusted
+#           certificate is installed; enabling it earlier would send every
+#           visitor to a browser security warning.
+# Change log:
+#   2026-10-26  0.4.0  Default page, custom 404, no directory listings,
+#                      HTTPS redirect prepared (disabled).
+# =============================================================================
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+Options -Indexes
+
+# --- HTTPS redirect: enable once a trusted certificate is installed ---------
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]

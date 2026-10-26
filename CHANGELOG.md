@@ -7,6 +7,7 @@
     2026-10-26  0.1.0  Created.
     2026-10-26  0.2.0  Added 0.2.0 entry.
     2026-10-26  0.3.0  Added 0.3.0 entry.
+    2026-10-26  0.4.0  Added 0.4.0 entry.
 -->
 
 # Changelog
@@ -14,6 +15,21 @@
 All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
+
+## [0.4.0] - 2026-10-26
+
+### Added
+
+- Custom 404 page (`layouts/404.html`), replacing GoDaddy's default.
+- `static/.htaccess`: `index.html` as default page, custom 404, no
+  directory listings, and an HTTPS redirect prepared but disabled until a
+  trusted certificate is installed.
+
+### Changed
+
+- Ward's own bio in `content/_index.md`.
+- `scripts/deploy.ps1` now uploads top-level dotfiles such as `.htaccess`
+  (sftp's `*` glob skips them).
 
 ## [0.3.0] - 2026-10-26
 

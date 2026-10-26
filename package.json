@@ -3,10 +3,10 @@
     "package.json - Project: Framework_Website_HopemanHorde - Date: 2026-10-26",
     "Purpose: dev-only tooling (lint + tests); the site itself is built by Hugo.",
     "Usage: npm install; npm run build; npm run lint; npm test",
-    "Change log: 2026-10-26 0.1.0 Initial tooling; 0.2.0 version bump; 0.3.0 deploy script."
+    "Change log: 2026-10-26 0.1.0 Initial tooling; 0.2.0 version bump; 0.3.0 deploy script; 0.4.0 version bump."
   ],
   "name": "framework-website-hopemanhorde",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Source for HopemanHorde.com",
   "license": "MIT",

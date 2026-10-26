@@ -8,6 +8,7 @@
   Usage   : npm test   (Windows PowerShell required)
   Change log:
     2026-10-26  0.3.0  Initial deploy tests.
+    2026-10-26  0.4.0  Dotfile upload test.
 */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -75,4 +76,10 @@ test('remotePath must be relative and not escape the home dir', () => {
     const { status } = runDeploy({ ...good, remotePath });
     assert.notEqual(status, 0, `accepted remotePath "${remotePath}"`);
   }
+});
+
+test('dry run also uploads dotfiles such as .htaccess', () => {
+  const { status, out } = runDeploy(good);
+  assert.equal(status, 0, out);
+  assert.match(out, /put "\.htaccess"/);
 });
