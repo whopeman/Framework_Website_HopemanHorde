@@ -5,12 +5,14 @@
   Purpose : Minimal site stylesheet (own theme, light and dark).
   Change log:
     2026-10-26  0.1.0  Initial styles.
+    2026-10-26  0.2.0  GitHub button, project cards, empty state.
 */
 :root {
   --bg: #fdfdfc;
   --fg: #1d1f21;
   --muted: #5f6368;
   --accent: #2b5fad;
+  --border: #d9dbde;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +21,7 @@
     --fg: #e6e6e3;
     --muted: #9aa0a6;
     --accent: #7ea8e8;
+    --border: #33373d;
   }
 }
 
@@ -41,8 +44,34 @@ header {
 }
 
 .site-title { font-weight: 700; text-decoration: none; color: var(--fg); }
-.project-list { list-style: none; padding: 0; }
-.project-list li { margin-bottom: 1.25rem; }
-.project-list p { margin: 0.25rem 0; }
-.status { color: var(--muted); font-size: 0.85em; margin-left: 0.5rem; }
+
+.github-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.4rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.project-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.project-card h3 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+.project-card p { margin: 0.25rem 0; }
+.meta { font-size: 0.9em; }
+.status { color: var(--muted); margin-right: 0.5rem; }
+.empty-state { color: var(--muted); font-style: italic; }
 footer { margin-top: 3rem; color: var(--muted); font-size: 0.9em; }

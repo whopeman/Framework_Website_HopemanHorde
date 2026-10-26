@@ -2,32 +2,42 @@
   layouts/home.html
   Project : Framework_Website_HopemanHorde
   Date    : 2026-10-26
-  Purpose : Home page: About text, GitHub link, and the project list
-            rendered from data/projects.yaml (via hugo.Data).
+  Purpose : Home page: About text, prominent GitHub link, and project cards
+            rendered from data/projects.yaml (via hugo.Data), with an empty
+            state when no projects are listed.
   Change log:
     2026-10-26  0.1.0  Initial home template.
+    2026-10-26  0.2.0  Bio wrapper, GitHub button, project cards, empty state.
 */ -}}
 {{ define "main" }}
 <section id="about">
   <h1>{{ .Title }}</h1>
-  {{ .Content }}
-  <p>Find my code on <a href="https://github.com/{{ site.Params.githubUser }}">GitHub (@{{ site.Params.githubUser }})</a>.</p>
+  <div class="bio">
+    {{- .Content -}}
+  </div>
+  <p>
+    <a class="github-link" href="https://github.com/{{ site.Params.githubUser }}">GitHub: @{{ site.Params.githubUser }}</a>
+  </p>
 </section>
 <section id="projects">
   <h2>Projects</h2>
   {{- with hugo.Data.projects }}
-  <ul class="project-list">
+  <ul class="project-grid">
     {{- range . }}
-    <li>
-      <a href="{{ .path | relURL }}">{{ .name }}</a>
-      {{ with .status }}<span class="status">{{ . }}</span>{{ end }}
+    <li class="project-card">
+      <h3><a href="{{ .path | relURL }}">{{ .name }}</a></h3>
       <p>{{ .description }}</p>
-      {{ with .repo }}<p><a href="{{ . }}">Source</a></p>{{ end }}
+      {{- if or .status .repo }}
+      <p class="meta">
+        {{- with .status }}<span class="status">{{ . }}</span>{{ end }}
+        {{- with .repo }} <a href="{{ . }}">Source</a>{{ end -}}
+      </p>
+      {{- end }}
     </li>
     {{- end }}
   </ul>
   {{- else }}
-  <p>No projects published yet.</p>
+  <p class="empty-state">No projects published yet. Check back soon.</p>
   {{- end }}
 </section>
 {{- end }}

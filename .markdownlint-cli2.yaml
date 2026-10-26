@@ -4,9 +4,12 @@
 # Purpose : markdownlint configuration.
 # Change log:
 #   2026-10-26  0.1.0  Allow leading HTML header comments and wide tables.
+#   2026-10-26  0.2.0  Allow repeated changelog subheadings.
 config:
   MD013: false        # line length (tables/URLs)
   MD041: false        # files start with a header comment, not an H1
+  MD024:
+    siblings_only: true   # Keep a Changelog repeats "### Added" per release
 ignores:
   - node_modules/**
   - public/**
