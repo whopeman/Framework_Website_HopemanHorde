@@ -19,5 +19,10 @@
 #     status: active
 # Change log:
 #   2026-10-26  0.1.0  Created as an empty list placeholder.
+#   2026-10-28  0.2.0  List Non-Profit Spending Reports.
 # =============================================================================
-[]
+- name: "Non-Profit Spending Reports"
+  path: "/nonprofit-spending/"
+  description: "Leadership and top salaries of the largest US non-profits, from public IRS Form 990 filings."
+  repo: "https://github.com/whopeman/nonprofit-spending-reports"
+  status: "active"

@@ -4,14 +4,16 @@
   Date    : 2026-10-26
   Purpose : Tests for scripts/new-project.ps1: slug/field validation,
             registry update and optional project scaffolding. Every case
-            works on a temp copy of data/projects.yaml.
+            works on a temp, empty registry with data/projects.yaml's header.
   Usage   : npm test   (Windows PowerShell required)
   Change log:
     2026-10-26  0.6.0  Initial tests.
+    2026-10-28  0.6.2  Start from an empty registry, not a copy of the real
+                       list, so the tests still pass once projects are listed.
 */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
@@ -21,10 +23,17 @@ import { parse } from 'yaml';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const script = join(root, 'scripts', 'new-project.ps1');
 
+// The real registry's comment header with an empty list, whatever is listed now.
+function emptyRegistry() {
+  const header = readFileSync(join(root, 'data', 'projects.yaml'), 'utf8')
+    .split(/\r?\n/).filter((line) => line.startsWith('#'));
+  return [...header, '[]', ''].join('\n');
+}
+
 function withTempData(fn) {
   const dir = mkdtempSync(join(tmpdir(), 'hh-newproj-'));
   const data = join(dir, 'projects.yaml');
-  copyFileSync(join(root, 'data', 'projects.yaml'), data);
+  writeFileSync(data, emptyRegistry());
   try { return fn(dir, data); } finally { rmSync(dir, { recursive: true, force: true }); }
 }
 
