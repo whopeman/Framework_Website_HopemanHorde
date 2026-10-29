@@ -26,3 +26,8 @@
   description: "Leadership and top salaries of the largest US non-profits, from public IRS Form 990 filings."
   repo: "https://github.com/whopeman/nonprofit-spending-reports"
   status: "active"
+- name: "Campaign Donations"
+  path: "/campaign-donations/"
+  description: "Donor tracking and aggregation for federal campaigns, from public FEC data."
+  repo: "https://github.com/whopeman/campaign-donations"
+  status: "active"
