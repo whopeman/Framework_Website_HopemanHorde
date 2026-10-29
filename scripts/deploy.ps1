@@ -27,6 +27,8 @@
     2026-10-26  0.4.0  Upload top-level dotfiles (.htaccess).
     2026-10-26  0.4.1  Also upload the 404 page as 404.shtml.
     2026-10-26  0.6.0  Project mode (slug + sourceDir -> public_html/<slug>).
+    2026-10-27  0.6.1  Create top-level remote folders before "put -r *"
+                       (OpenSSH sftp does not, so subfolder uploads failed).
 #>
 param(
   [string]$ConfigPath = 'deploy.local.json',
@@ -105,8 +107,14 @@ $batch = @(
   "-mkdir `"$remotePath`""
   "cd `"$remotePath`""
   "lcd `"$($source -replace '\\', '/')`""
-  'put -r *'
 )
+# OpenSSH's "put -r *" does not create the remote folder for each matched
+# directory, so make the top-level ones first (deeper levels are created by put -r).
+if (Test-Path $source) {
+  Get-ChildItem -Path $source -Directory |
+    ForEach-Object { $batch += "-mkdir `"$($_.Name)`"" }
+}
+$batch += 'put -r *'
 # sftp's * glob skips dotfiles, so upload top-level ones (e.g. .htaccess) by name.
 if (Test-Path $source) {
   Get-ChildItem -Path $source -Force -File -Filter '.*' |
